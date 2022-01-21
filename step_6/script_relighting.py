@@ -129,7 +129,9 @@ def process_mask(mask_project, mask_detect):
     mask_detect = np.argmax(mask_detect, axis=2)
     mask_detect = mask_detect == 1 # 1 means skin
     
-    mask = np.logical_and(mask_project, mask_detect)
+    # mask = np.logical_and(mask_project, mask_detect)
+    # skip the face_parsing,
+    mask = mask_project
     # remove some boundary pixels since they are not accurate
     kernel = np.ones((11,11), np.uint8)
     mask = cv2.erode(mask.astype(np.uint8), kernel, iterations=1)
@@ -154,7 +156,7 @@ def process_normal(normal):
 def script_relighting(numImgs):
     lightPath = 'processed_bip2019'
     lightList = []
-    with open('lighting.list')) as f:
+    with open('../lighting.list') as f:
         for line in f:
             tmp = line.strip()
             lightList.append(tmp)
@@ -248,7 +250,7 @@ def script_relighting(numImgs):
             Lab[:,:,0] = Limg
             img = cv2.cvtColor(Lab, cv2.COLOR_Lab2BGR)
             cv2.imwrite(os.path.join(savePath, imgName + '_{:02d}.png'.format(i)), img)
-            cv2.imwrite(os.path.join(savePath, 'shading_' + imgName + '_{:02d}.png'.format(i)), 
+            cv2.imwrite(os.path.join(savePath, 'shading_' + imgName + '_{:02d}.png'.format(i)),
                     (( (shading - np.min(shading))/(np.max(shading) - np.min(shading)))*255.0).astype(np.uint8))
 
             # rendering half-sphere

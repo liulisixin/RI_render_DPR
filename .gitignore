@@ -6,3 +6,8 @@ bash*
 **/libigl
 **/SHTOOLS
 **/triangle_berkeley
+.idea
+relighting/
+relighting (copy)/
+result/
+step_6/processed_bip2019/

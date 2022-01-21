@@ -135,6 +135,20 @@ def generate_face(faceImg, shadingImg, normal_img, sh):
     new_shadingImg = np.reshape(new_shadingImg, (row, col))
 
     LImg = faceImg/255.0
+
+    # Lref = LImg / shadingImg
+    # ind = Lref > 1.0
+    # Lref[ind] = 1.0 - 1e-6
+    # ind = Lref < 0.0
+    # Lref[ind] = 1e-6
+    # # calculate the new face
+    # LnewFace = Lref * new_shadingImg
+    #
+    # Lref = (255.0*Lref).astype(np.uint8)
+    # LnewFace = (255.0 * LnewFace).astype(np.uint8)
+    #
+    # return LnewFace, new_shadingImg, Lref
+
     ratio = new_shadingImg/(shadingImg + 1e-6)
     newFace = LImg*ratio
     ind = newFace > 1.0

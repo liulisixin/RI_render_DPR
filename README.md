@@ -70,3 +70,27 @@ I use miniconda to setup virtual environment
          relighting faces
          download our processed bip2017 lighting through (https://drive.google.com/open?id=1l0SiR10jBqACiOeAvsXSXAufUtZ-VhxC), change line 155 in script_relighting.py to poit to the lighting folder 
          Apply face semantic segmentation to get skin region of the face: https://github.com/Liusifei/Face_Parsing_2016 save the results in folder face_parsing/ (examples are shown in face_parsing, you can also skip this by adapting the code of script_relighting.py)
+
+Note:
+Before compiling ligigl, install eigen first and modify sh as:
+g++ -std=c++11 -pthread -I/usr/include/eigen3/ -I/home/yixiong/PycharmProjects/RI_render_DPR/useful_code/libigl/include/ my_arap.cpp -o my_arap
+./result save the intermediate results provided by the authors.
+
+Step1, if opencv does not work, try "pip install opencv-python" instead. 
+Installing Pytorch depends on the system. 
+conda install pytorch==1.6.0 torchvision==0.7.0 cudatoolkit=9.2 -c pytorch
+
+Step2, read readme first.
+
+Step_3 meets problem: No such file or directory: '.../.node'.
+The reason is that triangle_berkeley has not been compiled since they use cmd to run it. 
+So, the solution is to compile triangle as readme in it (just run make).
+
+step_4: warp the normal, the change is obvious. 
+
+step_5: change the cv2.findContours in different version.
+
+Step_6: A little typo in the original text, and it should be:
+run bash run_relight.sh relighting faces download our processed bip2017 lighting through (https://drive.google.com/open?id=1l0SiR10jBqACiOeAvsXSXAufUtZ-VhxC), change line 155 in script_relighting.py to point to the lighting folder. Apply face semantic segmentation to get skin region of the face: https://github.com/Liusifei/Face_Parsing_2016 save the results in folder face_parsing/ (examples are shown in face_parsing, you can also skip this by adapting the code of script_relighting.py)
+I skip the use of Face_Parsing_2016.
+
